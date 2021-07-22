@@ -3,7 +3,6 @@ from collections import defaultdict
 import os
 import itertools
 import sys
-#import pandas as pd
 from pprint import pprint
 
 minRQccs="0.9"
@@ -28,12 +27,10 @@ rule makeCCS:
 	output:
 		"ccs/{runId}.min-rq" + minRQccs + ".min-passes" + minPasses +".ccs.bam"
 	threads: 8
+	conda: "envs/pacBio_env.yml"
 	shell:
 		'''
 uuid=$(uuidgen)
-set +eu
-conda activate pacBio.env
-set -eu
 
 ccs --minLength=10 --min-rq={minRQccs} --min-passes={minPasses} --max-length 1000000 -j {threads} --report-file ccs/{wildcards.runId}.min-rq{minRQccs}.min-passes{minPasses}.ccs_report.txt {input.bam} {config[TMPDIR]}/$uuid.bam
 mv {config[TMPDIR]}/$uuid.bam {output}
@@ -43,12 +40,10 @@ mv {config[TMPDIR]}/$uuid.bam {output}
 rule rqFilterCcs:
 	input: "ccs/{runId}.min-rq" + minRQccs + ".min-passes" + minPasses + ".ccs.bam"
 	output: temp("ccs/rqFilter/{runId}.min-rq" + minRQpostCcs + ".min-passes" + minPasses + ".ccs.bam")
+	conda: "envs/pacBio_env.yml"
 	shell:
 		'''
 uuid=$(uuidgen)
-set +eu
-conda activate pacBio.env
-set -eu
 
 bamtools filter -in {input} -out {config[TMPDIR]}/$uuid -tag "rq":">={minRQpostCcs}"
 mv {config[TMPDIR]}/$uuid {output}
@@ -61,13 +56,11 @@ rule removePrimers:
 		pb_adapters=config["PB_ADAPT"]
 	output: 
 		temp("ccs/clipped/{runId}.min-rq" + minRQpostCcs + ".min-passes" + minPasses + ".clipped.primer_5p--primer_3p.bam")
+	conda: "envs/pacBio_env.yml"
 	threads: 8
 	shell:
 		'''
 uuid=$(uuidgen)
-set +eu
-conda activate pacBio.env
-set -eu
 
 wd=$PWD
 mkdir {config[TMPDIR]}/$uuid
@@ -85,13 +78,11 @@ rule removeChimeras:
 		bam="ccs/clipped/{runId}.min-rq" + minRQpostCcs + ".min-passes" + minPasses + ".clipped.primer_5p--primer_3p.bam",
 		pb_adapters=config["PB_ADAPT"]
 	output: temp("ccs/nc/{runId}.min-rq" + minRQpostCcs + ".min-passes" + minPasses + ".nc.ccs.bam")
+	conda: "envs/pacBio_env.yml"
 	threads: 8
 	shell:
 		'''
 uuid=$(uuidgen)
-set +eu
-conda activate pacBio.env
-set -eu
 
 wd=$PWD
 mkdir {config[TMPDIR]}/$uuid
@@ -107,12 +98,10 @@ mv {config[TMPDIR]}/$uuid/* $(dirname {output})
 rule bamToFastq:
 	input: "ccs/nc/{runId}.min-rq" + minRQpostCcs + ".min-passes" + minPasses + ".nc.ccs.bam"
 	output: "ccs/fastq/{runId}.min-rq" + minRQpostCcs + ".min-passes" + minPasses + ".fastq.gz"
+	conda: "envs/pacBio_env.yml"
 	shell:
 		'''
 uuid=$(uuidgen)
-set +eu
-conda activate pacBio.env
-set -eu
 
 bamtools convert -format fastq -in {input} | gzip > {config[TMPDIR]}/$uuid
 mv {config[TMPDIR]}/$uuid {output}

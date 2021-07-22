@@ -1,0 +1,18 @@
+name: pacBio_env
+channels:
+  - conda-forge
+  - defaults
+  - r
+  - bioconda
+dependencies:
+  - _libgcc_mutex=0.1=conda_forge
+  - _openmp_mutex=4.5=1_gnu
+  - bamtools=2.5.1=he513fc3_6
+  - isoseq3=3.4.0=0
+  - libgcc-ng=9.3.0=h2828fa1_18
+  - libgomp=9.3.0=h2828fa1_18
+  - libstdcxx-ng=9.3.0=h6de172a_18
+  - lima=2.0.0=0
+  - pbccs=6.0.0=1
+  - zlib=1.2.11=h516909a_1010
+prefix: /users/rg/jlagarde/anaconda3/envs/pacBio.env

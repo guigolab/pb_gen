@@ -76,7 +76,7 @@ The `pb_gen` processing pipeline is pretty close to PacBio's recommendations, wi
 Here are the most notable differences between `pb_gen` and the [standard IsoSeq pipeline](https://github.com/PacificBiosciences/IsoSeq_SA3nUP/wiki/Tutorial:-Installing-and-Running-Iso-Seq-3-using-Conda):
 
 - `pb_gen` does not trim poly(A) tails from the reads. 
-- `pb_gen` skips the clustering step (`isoseq3 cluster`). Inter-read clustering is considered optional. Clutering reads into non-redundant transcript models is performed by LyRic at a later stage, based on their alignment to the reference genome.
+- `pb_gen` skips the clustering step (`isoseq3 cluster`). Inter-read clustering is considered optional. Clustering reads into non-redundant transcript models is performed by LyRic at a later stage, based on their alignment to the reference genome.
 
 ## Online resources
 

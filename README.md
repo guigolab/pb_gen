@@ -42,7 +42,7 @@ Mandatory input files include:
    
    where `{runId}` is an arbitrary unique string identifying each sequencing run.
 
-- **FASTA file of adapter sequences**: see `PB_ADAPT` config variable in [Configuration variables](##Configuration-variables) below).
+- **FASTA file of adapter sequences**: see `PB_ADAPT` config variable in [Configuration variables](#configuration-variables) below).
 
 ## Output 
 

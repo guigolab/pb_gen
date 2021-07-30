@@ -23,9 +23,9 @@ As with any other Snakemake workflow, the command issued will depend on your com
 
 ```bash
 snakemake -p --reason --latency-wait 100 --use-conda -s pb_gen.smk -j 4500 \
---configfile config_pacBio_AlzheimerBrain_ccs.json \ #change according to your needs
---jobname {rulename}.{jobid}._pb_gen \ # job naming rule for the HPC scheduler
---cluster-config cluster_config.json \ # cluster configuration (queue names, job resource requirements etc.). This file is not provided in the current repo.
+--configfile config_pacBio_AlzheimerBrain_ccs.json `#change according to your needs` \ 
+--jobname {rulename}.{jobid}._pb_gen `# job naming rule for the HPC scheduler` \ 
+--cluster-config cluster_config.json `# cluster configuration (queue names, job resource requirements etc.). This file is not provided in the current repo.` \ 
 --max-jobs-per-second 10 \
 --drmaa " -V -q {cluster.queue} -l disk={cluster.disk} -l virtual_free={cluster.virtual_free} -l h_rt={cluster.h_rt}  -o {cluster.out} -e {cluster.err} {cluster.threads} -P {cluster.project}" \
 --rerun-incomplete --keep-going  --show-failed-logs 

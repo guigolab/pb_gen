@@ -19,7 +19,7 @@ If using [DRMAA](https://en.wikipedia.org/wiki/DRMAA) (Distributed Resource Mana
 
 ## Execution
 
-As with any other Snakemake workflow, the command issued will depend on your computing environment. Here's an example which runs reasonably well in a UGE/DRMAA cluster environment, in my experience:
+As with any other Snakemake workflow, the command issued will depend on your computing environment. Here's an example which runs well in a UGE/DRMAA cluster environment, in my experience (`{variables}` in curly braces are expanded by Snakemake):
 
 ```bash
 snakemake -p --reason --latency-wait 100 --use-conda -s pb_gen.smk -j 4500 \

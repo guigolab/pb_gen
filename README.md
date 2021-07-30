@@ -38,9 +38,9 @@ Mandatory input files include:
 
 - **Subread BAM files** should be placed in a subdirectory named `raw/` and be named according to the following scheme: 
 
-   **`{runId}.subreads.bam`**
+   **`<runId>.subreads.bam`**
    
-   where `{runId}` is an arbitrary unique string identifying each sequencing run.
+   where `<runId>` is an arbitrary unique string identifying each sequencing run.
 
 - **FASTA file of adapter sequences**: see `PB_ADAPT` config variable in [Configuration variables](#configuration-variables) below).
 
@@ -50,9 +50,9 @@ Mandatory input files include:
 
 One gzipped FASTQ file is produced per input BAM file. The output FASTQ files are written in the **`ccs/fastq/`** subdirectory and are named according to the following scheme:
 
-`{runId}.min-rq{minRQpostCcs}.min-passes{minPasses}.fastq.gz`
+`<runId>.min-rq<minRQpostCcs>.min-passes<minPasses>.fastq.gz`
 
-`{runId}` is the basename of the corresponding input subread BAM, while `{minRQpostCcs}` and `{minPasses}` represent the `min-rq` (Minimum predicted accuracy, default **0.99**) and `min-passes` (Minimum number of full-length subreads required to generate a CCS read, default **1**) options passed to the IsoSeq software. These last two variables are currently hardcoded.
+`<runId>` is the basename of the corresponding input subread BAM, while `<minRQpostCcs>` and `<minPasses>` represent the `min-rq` (Minimum predicted accuracy, default **0.99**) and `min-passes` (Minimum number of full-length subreads required to generate a CCS read, default **1**) options passed to the IsoSeq software. These last two variables are currently hardcoded.
 
 
 ### Intermediate files
